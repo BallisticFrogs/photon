@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4008944655762072561}
   - component: {fileID: 833560664}
+  - component: {fileID: 7953030890626446345}
   m_Layer: 0
   m_Name: Atom
   m_TagString: Untagged
@@ -379,10 +380,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c72496a5536b241ac0730aa606dff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emissionAngleSpeed: 0.15
   energy: 0
+  emissionAngleSpeed: 80
   orbit: {fileID: 4008944656574937578}
   charge: {fileID: 6645207424677673176}
+--- !u!50 &7953030890626446345
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008944655762072560}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4008944655806005062
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf38e94cae054a4d9288f4230e25489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: -0.05
+  rotationSpeed: -20
 --- !u!1 &4008944656729064675
 GameObject:
   m_ObjectHideFlags: 0
