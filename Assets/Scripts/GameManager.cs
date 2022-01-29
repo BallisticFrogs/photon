@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Cinemachine;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#endif
+            Application.Quit();
+        }
+
         var targets = cinemachineTargetGroup.m_Targets;
         if (targets.Length > 0)
         {

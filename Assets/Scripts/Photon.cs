@@ -33,45 +33,13 @@ public class Photon : MonoBehaviour
             if (!hit || !hit.collider)
             {
                 // create a new photon near the latest checkpoint to continue playing
-                var pos = FindCorrectPopPosition(source.gameObject);
-                var velocity = (source.transform.position - pos).normalized * GameManager.INSTANCE.emissionSpeed * 2;
-                GameManager.INSTANCE.CreateNewPhoton(null, pos, velocity, energy, false);
-                GameManager.INSTANCE.RegisterAtom(source);
+                source.GenerateBonusPhoton(energy);
 
                 dead = true;
                 Velocity *= 10;
                 GameManager.INSTANCE.PhotonLost(this, 5000);
             }
         }
-    }
-
-    private Vector3 FindCorrectPopPosition(GameObject source)
-    {
-        var sourcePos = source.transform.position;
-
-        int attempts = 0;
-        while (attempts < 10)
-        {
-            attempts++;
-            var v = GenerateRandomPosition();
-            var pos = sourcePos + v;
-            var hitCheck = Physics2D.CircleCast(pos, GetRadius(), -v, float.PositiveInfinity, Masks.ATOMS);
-            if (hitCheck.collider && hitCheck.rigidbody.gameObject == source)
-            {
-                return pos;
-            }
-            else
-            {
-                Debug.Log("hit: " + hitCheck.rigidbody.gameObject);
-            }
-        }
-
-        return sourcePos + GenerateRandomPosition();
-    }
-
-    private static Vector3 GenerateRandomPosition()
-    {
-        return Vector2.up.Rotate(Random.Range(0, 360)) * GameManager.INSTANCE.checkpointPhotonPopDistance;
     }
 
     private float GetRadius()

@@ -11,14 +11,16 @@ public class Atom : MonoBehaviour
     public Transform orbit;
     public GameObject charge;
 
-    void Start()
-    {
-    }
+    private bool keyDown;
+    private bool keyWasDown;
 
     void Update()
     {
-        var keyDown = Input.anyKeyDown;
-        if (keyDown && energy > 0)
+        keyWasDown = keyDown;
+        keyDown = Input.anyKey;
+
+        var keyUp = !keyDown && keyWasDown;
+        if (keyUp && energy > 0)
         {
             EmitPhoton();
         }
@@ -37,8 +39,9 @@ public class Atom : MonoBehaviour
     {
         if (energy > 0)
         {
+            float bonusSpeed = keyDown ? 3 : 1;
             var radius = orbit.transform.localScale.x / 2f;
-            emissionAngle += GameManager.INSTANCE.emissionAngleSpeed * emissionAngleSign * Time.deltaTime;
+            emissionAngle += GameManager.INSTANCE.emissionAngleSpeed * emissionAngleSign * Time.deltaTime * bonusSpeed;
             var v = Vector2.up.Rotate(emissionAngle) * radius * 0.97f;
             charge.transform.position = transform.position + new Vector3(v.x, v.y, charge.transform.position.z);
         }
@@ -51,6 +54,39 @@ public class Atom : MonoBehaviour
         {
             charge.SetActive(true);
         }
+    }
+
+    public void GenerateBonusPhoton(float energy)
+    {
+        var pos = FindCorrectPopPosition();
+        var velocity = (transform.position - pos).normalized * GameManager.INSTANCE.emissionSpeed * 2;
+        GameManager.INSTANCE.CreateNewPhoton(null, pos, velocity, energy, false);
+        GameManager.INSTANCE.RegisterAtom(this);
+    }
+
+    private Vector3 FindCorrectPopPosition()
+    {
+        var sourcePos = transform.position;
+
+        int attempts = 0;
+        while (attempts < 10)
+        {
+            attempts++;
+            var v = GenerateRandomPosition();
+            var pos = sourcePos + v;
+            var hitCheck = Physics2D.CircleCast(pos, 1, -v, float.PositiveInfinity, Masks.ATOMS);
+            if (hitCheck.collider && hitCheck.rigidbody.gameObject == gameObject)
+            {
+                return pos;
+            }
+        }
+
+        return sourcePos + GenerateRandomPosition();
+    }
+
+    private static Vector3 GenerateRandomPosition()
+    {
+        return Vector2.up.Rotate(Random.Range(0, 360)) * GameManager.INSTANCE.checkpointPhotonPopDistance;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
