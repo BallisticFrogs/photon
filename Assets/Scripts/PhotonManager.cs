@@ -7,6 +7,7 @@ public class PhotonManager : MonoBehaviour
     public float energy = 1;
     private PhotonState State = PhotonState.MOVING_PARTICULE;
     public Vector2 Direction;
+    public GameObject source;
 
     void Start()
     {

@@ -4,7 +4,6 @@ public class Atom : MonoBehaviour
 {
     public float energy = 0f;
 
-    public float emissionAngleSpeed = -1f;
     private float emissionAngle;
     private int emissionAngleSign;
 
@@ -20,13 +19,31 @@ public class Atom : MonoBehaviour
         var keyDown = Input.anyKeyDown;
         if (keyDown && energy > 0)
         {
-            // TODO emit photon
+            EmitPhoton();
         }
 
+        UpdateEmissionAngle();
+    }
+
+    private void EmitPhoton()
+    {
+        energy = 0;
+
+        var photonObj = Instantiate(GameManager.INSTANCE.photonPrefab, charge.transform.position,
+            Quaternion.identity);
+
+        var photon = photonObj.GetComponent<PhotonManager>();
+        var dir = (charge.transform.position - transform.position).normalized;
+        photon.Direction = dir * GameManager.INSTANCE.emissionSpeed;
+        photon.source = gameObject;
+    }
+
+    private void UpdateEmissionAngle()
+    {
         if (energy > 0)
         {
             var radius = orbit.transform.localScale.x / 2f;
-            emissionAngle += emissionAngleSpeed * emissionAngleSign * Time.deltaTime;
+            emissionAngle += GameManager.INSTANCE.emissionAngleSpeed * emissionAngleSign * Time.deltaTime;
             var v = Rotate(Vector2.up, emissionAngle) * radius * 0.97f;
             charge.transform.position = transform.position + new Vector3(v.x, v.y, charge.transform.position.z);
         }
@@ -35,8 +52,7 @@ public class Atom : MonoBehaviour
         {
             charge.SetActive(false);
         }
-
-        if (energy > 0 && !charge.activeSelf)
+        else if (energy > 0 && !charge.activeSelf)
         {
             charge.SetActive(true);
         }
@@ -45,7 +61,7 @@ public class Atom : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         var photon = col.gameObject.GetComponent<PhotonManager>();
-        if (photon == null)
+        if (photon == null || photon.source == gameObject)
         {
             return;
         }
