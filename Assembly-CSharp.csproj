@@ -41,10 +41,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/PhotonManager.cs" />
-     <Compile Include="Assets/PhotonState.cs" />
+     <Compile Include="Assets/Scripts/PhotonManager.cs" />
+     <Compile Include="Assets/Scripts/PhotonState.cs" />
      <Compile Include="Assets/Scripts/Rotator.cs" />
      <Compile Include="Assets/Scripts/Atom.cs" />
+     <Compile Include="Assets/Scripts/SphereManager.cs" />
+     <Compile Include="Assets/Scripts/GameManager.cs" />
+     <Compile Include="Assets/Scripts/Utils.cs" />
+     <Compile Include="Assets/Scripts/Layers.cs" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
