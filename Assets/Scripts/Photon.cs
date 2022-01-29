@@ -1,21 +1,26 @@
 using DefaultNamespace;
 using UnityEngine;
 
-public class PhotonManager : MonoBehaviour
+public class Photon : MonoBehaviour
 {
     public float energy = 1;
     public Vector2 Velocity;
     private PhotonState State = PhotonState.MOVING_PARTICULE;
 
-    [HideInInspector] public GameObject source;
+    [HideInInspector] public Atom source;
     private float timeFromSource;
     private bool dead;
 
+    private void Start()
+    {
+        // GameManager.INSTANCE.RegisterPhoton(this);
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.anyKeyDown)
         {
-            SwitchPhoton();
+            SwitchPhotonState();
         }
 
         transform.Translate(Velocity * Time.deltaTime);
@@ -27,17 +32,15 @@ public class PhotonManager : MonoBehaviour
                 float.PositiveInfinity, Masks.ATOMS);
             if (!hit || !hit.collider)
             {
-                dead = true;
-
                 // create a new photon near the latest checkpoint to continue playing
-                var pos = FindCorrectPopPosition(source);
-                var photonObj = Instantiate(GameManager.INSTANCE.photonPrefab, pos, Quaternion.identity);
-                var photon = photonObj.GetComponent<PhotonManager>();
-                photon.energy = energy;
-                photon.Velocity = (source.transform.position - pos).normalized * GameManager.INSTANCE.emissionSpeed;
+                var pos = FindCorrectPopPosition(source.gameObject);
+                var velocity = (source.transform.position - pos).normalized * GameManager.INSTANCE.emissionSpeed * 2;
+                GameManager.INSTANCE.CreateNewPhoton(null, pos, velocity, energy, false);
+                GameManager.INSTANCE.RegisterAtom(source);
 
+                dead = true;
                 Velocity *= 10;
-                Destroy(gameObject, 5f);
+                GameManager.INSTANCE.PhotonLost(this, 5000);
             }
         }
     }
@@ -76,7 +79,7 @@ public class PhotonManager : MonoBehaviour
         return transform.localScale.x * 0.5f;
     }
 
-    void SwitchPhoton()
+    void SwitchPhotonState()
     {
         if (PhotonState.MOVING_PARTICULE == State)
         {

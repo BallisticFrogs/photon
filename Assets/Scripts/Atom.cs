@@ -28,15 +28,9 @@ public class Atom : MonoBehaviour
 
     private void EmitPhoton()
     {
+        GameManager.INSTANCE.CreateNewPhoton(this);
+        GameManager.INSTANCE.UnregisterAtom(this);
         energy = 0;
-
-        var photonObj = Instantiate(GameManager.INSTANCE.photonPrefab, charge.transform.position,
-            Quaternion.identity);
-
-        var photon = photonObj.GetComponent<PhotonManager>();
-        var dir = (charge.transform.position - transform.position).normalized;
-        photon.Velocity = dir * GameManager.INSTANCE.emissionSpeed;
-        photon.source = gameObject;
     }
 
     private void UpdateEmissionAngle()
@@ -61,8 +55,8 @@ public class Atom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        var photon = col.gameObject.GetComponent<PhotonManager>();
-        if (photon == null || photon.source == gameObject)
+        var photon = col.gameObject.GetComponent<Photon>();
+        if (!photon || (photon.source && photon.source.gameObject == gameObject))
         {
             return;
         }
@@ -71,7 +65,8 @@ public class Atom : MonoBehaviour
         energy += photon.energy;
         var nucleusToCollision = col.gameObject.transform.position - gameObject.transform.position;
         emissionAngle = Vector2.SignedAngle(Vector2.up, nucleusToCollision);
-        Destroy(col.gameObject);
+        GameManager.INSTANCE.PhotonLost(photon);
+        GameManager.INSTANCE.RegisterAtom(this);
 
         // compute rotation direction from angle and position of the incoming photon relative to the nucleus
         float a = Vector2.SignedAngle(photon.Velocity, -nucleusToCollision);
