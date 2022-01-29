@@ -32,9 +32,6 @@ public class Photon : MonoBehaviour
                 float.PositiveInfinity, Masks.ATOMS);
             if (!hit || !hit.collider)
             {
-                // create a new photon near the latest checkpoint to continue playing
-                source.GenerateBonusPhoton(energy);
-
                 dead = true;
                 Velocity *= 10;
                 GameManager.INSTANCE.PhotonLost(this, 5000);

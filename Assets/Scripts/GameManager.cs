@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
 
+        if (cinemachineTargetGroup.m_Targets.Length == 0)
+        {
+            LevelManager.INSTANCE.RestartAtLastCheckpoint();
+        }
+
         var targets = cinemachineTargetGroup.m_Targets;
         if (targets.Length > 0)
         {
