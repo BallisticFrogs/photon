@@ -8,6 +8,8 @@ public class Photon : MonoBehaviour
     private PhotonState State = PhotonState.MOVING_PARTICULE;
 
     [HideInInspector] public Atom source;
+
+    private bool inTransit;
     private float timeFromSource;
     private bool dead;
 
@@ -37,6 +39,17 @@ public class Photon : MonoBehaviour
                 GameManager.INSTANCE.PhotonLost(this, 5000);
             }
         }
+    }
+
+    public void SetInTransit(bool transit)
+    {
+        this.inTransit = transit;
+        timeFromSource = 0;
+    }
+
+    public bool IsInTransit()
+    {
+        return inTransit;
     }
 
     private float GetRadius()
