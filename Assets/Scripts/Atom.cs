@@ -34,7 +34,7 @@ public class Atom : MonoBehaviour
 
         var photon = photonObj.GetComponent<PhotonManager>();
         var dir = (charge.transform.position - transform.position).normalized;
-        photon.Direction = dir * GameManager.INSTANCE.emissionSpeed;
+        photon.Velocity = dir * GameManager.INSTANCE.emissionSpeed;
         photon.source = gameObject;
     }
 
@@ -73,7 +73,7 @@ public class Atom : MonoBehaviour
         Destroy(col.gameObject);
 
         // compute rotation direction from angle and position of the incoming photon relative to the nucleus
-        float a = Vector2.SignedAngle(photon.Direction, -nucleusToCollision);
+        float a = Vector2.SignedAngle(photon.Velocity, -nucleusToCollision);
         emissionAngleSign = a > 0 ? 1 : -1;
     }
 

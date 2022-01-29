@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public float emissionAngleSpeed = -1f;
     public float emissionSpeed = 2f;
+    public float missDetectionTime = 3f;
 
     private void Awake()
     {

@@ -3,15 +3,12 @@ using UnityEngine;
 
 public class PhotonManager : MonoBehaviour
 {
-    public float speed;
     public float energy = 1;
+    public Vector2 Velocity;
     private PhotonState State = PhotonState.MOVING_PARTICULE;
-    public Vector2 Direction;
-    public GameObject source;
 
-    void Start()
-    {
-    }
+    [HideInInspector] public GameObject source;
+    private float timeFromSource;
 
     void Update()
     {
@@ -20,7 +17,18 @@ public class PhotonManager : MonoBehaviour
             SwitchPhoton();
         }
 
-        transform.Translate(Direction * speed * Time.deltaTime);
+        transform.Translate(Velocity * Time.deltaTime);
+
+        timeFromSource += Time.deltaTime;
+        if (timeFromSource > GameManager.INSTANCE.missDetectionTime)
+        {
+            var hit = Physics2D.Raycast(transform.position, Velocity);
+            if (!hit)
+            {
+                // 
+                Destroy(gameObject);
+            }
+        }
     }
 
     void SwitchPhoton()
