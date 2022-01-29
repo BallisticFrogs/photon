@@ -56,16 +56,24 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _Amplitude: 0
+    - _BorderOpacityX: 0.05
+    - _BorderOpacityY: 0.09
     - _EnableExternalAlpha: 0
     - _HeightWaveFrequency: 0.24
     - _MaxMask: -0.3
     - _MinMask: -0.75
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaveSpeed: 2.52
+    - _RippleDensity: 6
+    - _RippleSpeed: 1
+    - _WaveSpeed: -2.52
     - _heightWaveFrequency: -0.48
+    - _opacity: 2.99
     m_Colors:
     - _Color: {r: 0.827451, g: 0.15294118, b: 0.20392157, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RippleColor: {r: 0.1764706, g: 0.5764706, b: 0.8666667, a: 0}
+    - _RippleColor2: {r: 0.827451, g: 0.1529412, b: 0.2039216, a: 0}
+    - _RippleColor3: {r: 0.1568628, g: 0.7764706, b: 0.254902, a: 0}
   m_BuildTextureStacks: []
