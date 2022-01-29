@@ -135,12 +135,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5934526290082064392, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.22
+      value: -5.48
       objectReference: {fileID: 0}
     - target: {fileID: 5934526290082064392, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.42
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5934526290082064392, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
       propertyPath: m_LocalPosition.z
@@ -174,6 +178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064396, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5934526290082064396, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
       propertyPath: m_Name
       value: Photon
@@ -326,7 +334,8 @@ MonoBehaviour:
   photonPrefab: {fileID: 5934526290082064396, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
   emissionAngleSpeed: 80
   emissionSpeed: 4
-  missDetectionTime: 3
+  missDetectionTime: 1
+  checkpointPhotonPopDistance: 7
 --- !u!4 &909398718
 Transform:
   m_ObjectHideFlags: 0

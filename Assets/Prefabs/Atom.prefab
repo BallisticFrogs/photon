@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 114614280}
   - component: {fileID: 114614281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mask (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 206977991}
   - component: {fileID: 206977992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mask (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1770010894}
   - component: {fileID: 1770010895}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mask (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074349373}
   - component: {fileID: 2074349374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mask (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 4008944655762072561}
   - component: {fileID: 833560664}
   - component: {fileID: 7953030890626446345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Atom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,6 +365,7 @@ Transform:
   - {fileID: 4008944655806005063}
   - {fileID: 4008944656574937578}
   - {fileID: 6058460083610741965}
+  - {fileID: 6406454114808376883}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -381,9 +382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energy: 0
-  emissionAngleSpeed: 80
   orbit: {fileID: 4008944656574937578}
-  charge: {fileID: 6645207424677673176}
+  charge: {fileID: 6406454114808376887}
 --- !u!50 &7953030890626446345
 Rigidbody2D:
   serializedVersion: 4
@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4008944655806005063}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Nucleus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4008944656574937578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Orbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 4008944656593817304}
   - component: {fileID: 4008944656593817305}
   - component: {fileID: 1731235200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4008944656729064672}
   - component: {fileID: 4008944656729064673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4008944657179446544}
   - component: {fileID: 4008944657179446545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4008944657408198134}
   - component: {fileID: 4008944657408198135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: atom-nucleus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,13 +798,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6058460083610741965}
   - component: {fileID: 5298314540328399184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6058460083610741965
 Transform:
   m_ObjectHideFlags: 0
@@ -872,3 +872,86 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &771206410467853883
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4008944655762072561}
+    m_Modifications:
+    - target: {fileID: 5934526288393725216, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526288468385412, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526289796279795, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064396, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_Name
+      value: Charge (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934526290082064396, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+--- !u!4 &6406454114808376883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5934526290082064392, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+  m_PrefabInstance: {fileID: 771206410467853883}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6406454114808376887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5934526290082064396, guid: bc603f3d21020e043b6363b25b5845dc, type: 3}
+  m_PrefabInstance: {fileID: 771206410467853883}
+  m_PrefabAsset: {fileID: 0}

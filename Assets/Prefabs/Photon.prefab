@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5934526288393725228}
   - component: {fileID: 5934526288393725229}
   - component: {fileID: 5934526288393725218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlueSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 5934526288468385408}
   - component: {fileID: 5934526288468385409}
   - component: {fileID: 5934526288468385414}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5934526289139008318}
   - component: {fileID: 5934526289139008313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5934526289224277187}
   - component: {fileID: 5934526289224277186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 5934526289796279804}
   - component: {fileID: 5934526289796279805}
   - component: {fileID: 5934526289796279806}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RedSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5934526289925714762}
   - component: {fileID: 5934526289925714773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 5934526290082064399}
   - component: {fileID: 128761050}
   - component: {fileID: 128761049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Photon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

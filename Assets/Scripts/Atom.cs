@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 
 public class Atom : MonoBehaviour
@@ -44,7 +45,7 @@ public class Atom : MonoBehaviour
         {
             var radius = orbit.transform.localScale.x / 2f;
             emissionAngle += GameManager.INSTANCE.emissionAngleSpeed * emissionAngleSign * Time.deltaTime;
-            var v = Rotate(Vector2.up, emissionAngle) * radius * 0.97f;
+            var v = Vector2.up.Rotate(emissionAngle) * radius * 0.97f;
             charge.transform.position = transform.position + new Vector3(v.x, v.y, charge.transform.position.z);
         }
 
@@ -75,14 +76,5 @@ public class Atom : MonoBehaviour
         // compute rotation direction from angle and position of the incoming photon relative to the nucleus
         float a = Vector2.SignedAngle(photon.Velocity, -nucleusToCollision);
         emissionAngleSign = a > 0 ? 1 : -1;
-    }
-
-    public static Vector2 Rotate(Vector2 v, float angleInDegs)
-    {
-        float angleInRads = angleInDegs * Mathf.Deg2Rad;
-        return new Vector2(
-            v.x * Mathf.Cos(angleInRads) - v.y * Mathf.Sin(angleInRads),
-            v.x * Mathf.Sin(angleInRads) + v.y * Mathf.Cos(angleInRads)
-        );
     }
 }
