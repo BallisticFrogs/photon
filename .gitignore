@@ -4,3 +4,6 @@ Temp/
 Logs/
 obj/
 UserSettings/
+*.csproj
+Assembly-CSharp.csproj
+Assembly-CSharp-firstpass.csproj
