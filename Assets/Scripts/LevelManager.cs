@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -21,17 +22,12 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         INSTANCE = this;
-    }
-
-    private void Start()
-    {
         if (checkpoints == null) checkpoints = new List<Checkpoint>();
         checkpoints.Insert(0, new Checkpoint(true, start));
         checkpoints.Add(new Checkpoint(false, end));
-        RestartAtLastCheckpoint();
     }
 
-    void Update()
+    async void Update()
     {
         if (exit && exit.energy > 0)
         {
@@ -43,10 +39,16 @@ public class LevelManager : MonoBehaviour
         if (!done && checkpoints[^1].reached)
         {
             done = true;
+            enabled = false;
+            INSTANCE = null;
 
             // victory
+            end.energy = 0;
             Instantiate(victoryVFX, end.transform.position, Quaternion.identity);
             // TODO play SFX
+
+            await Task.Delay(2000);
+            GameManager.INSTANCE.NextLevel(end);
         }
     }
 

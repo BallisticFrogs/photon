@@ -1,13 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public const string TAG_LEVEL_MANAGER = "LevelManager";
+
     public static GameManager INSTANCE;
 
     public GameObject photonPrefab;
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
     
     public ParticleSystem photonParticleVFX;
 
+    public float levelSpacing = 50f;
     public float emissionAngleSpeed = -1f;
     public float emissionSpeed = 2f;
     public float missDetectionTime = 3f;
@@ -35,8 +38,66 @@ public class GameManager : MonoBehaviour
         if (SceneManager.sceneCount == 1)
         {
             // load menu scene
-            SceneManager.LoadScene(menuSceneIndex);
+            SceneManager.LoadScene(menuSceneIndex, LoadSceneMode.Additive);
         }
+
+        var levelManagerObj = GameObject.FindGameObjectWithTag(TAG_LEVEL_MANAGER);
+        var levelManager = levelManagerObj.GetComponent<LevelManager>();
+        levelManager.RestartAtLastCheckpoint();
+    }
+
+    public async void NextLevel(Atom currentPosition)
+    {
+        Debug.Log("loading next level");
+
+        // compute next scene to load
+        var currentScene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
+        var sceneIndex = currentScene.buildIndex;
+        var levelIndex = levelSceneIndices.IndexOf(sceneIndex);
+        var nextLevel = levelIndex < 0 ? 0 : levelIndex + 1;
+        if (levelIndex >= levelSceneIndices.Count)
+        {
+            Debug.Log("no next level found");
+            return;
+        }
+
+        var nextSceneIndex = levelSceneIndices[nextLevel];
+
+        // make sure the old level manager is not active
+        var levelManagers = GameObject.FindGameObjectsWithTag(TAG_LEVEL_MANAGER);
+        foreach (var currManager in levelManagers)
+        {
+            currManager.SetActive(false);
+        }
+
+        // load scene
+        var nextScene = SceneManager.GetSceneByBuildIndex(nextSceneIndex);
+        // SceneManager.LoadScene(nextSceneIndex, LoadSceneMode.Additive);
+        await SceneManager.LoadSceneAsync(nextSceneIndex, LoadSceneMode.Additive);
+
+        Debug.Log("next level loaded, preparing it");
+
+        // translate everything to the right of the current position
+        var scene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
+        SceneManager.SetActiveScene(scene);
+        var offset = new Vector3(currentPosition.transform.position.x + levelSpacing, 0, 0);
+        var sceneObjects = scene.GetRootGameObjects();
+        foreach (var obj in sceneObjects)
+        {
+            obj.transform.position += offset;
+        }
+
+        Debug.Log("sending player to next level start atom");
+
+        // send player to the new level
+        var levelManagerObj = GameObject.FindGameObjectWithTag(TAG_LEVEL_MANAGER);
+        var levelManager = levelManagerObj.GetComponent<LevelManager>();
+        currentPosition.GenerateBonusPhotonTowards(levelManager.start);
+
+        // unload previous scene
+        await Task.Delay(3000);
+        await SceneManager.UnloadSceneAsync(currentScene);
+        Debug.Log("old level has been unloaded");
     }
 
     private void Update()

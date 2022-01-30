@@ -277,13 +277,14 @@ MonoBehaviour:
   photonPrefab: {fileID: 5934526290082064396, guid: 2fc37e0d7f4dd4e9e8cc3634207bc686, type: 3}
   cinemachineCam: {fileID: 425913046}
   cinemachineTargetGroup: {fileID: 1247711722}
+  levelSpacing: 15
   photonParticleVFX: {fileID: 7826781300829271176}
   emissionAngleSpeed: 80
   emissionSpeed: 4
   missDetectionTime: 1
   checkpointPhotonPopDistance: 7
   menuSceneIndex: 1
-  levelSceneIndices: 
+  levelSceneIndices: 0200000003000000
 --- !u!4 &909398718
 Transform:
   m_ObjectHideFlags: 0

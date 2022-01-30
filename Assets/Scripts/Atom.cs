@@ -13,10 +13,20 @@ public class Atom : MonoBehaviour
 
     private bool keyDown;
     private bool keyWasDown;
+    private float keyDownTime;
 
     void Update()
     {
         keyWasDown = keyDown;
+        if (keyDown && keyWasDown)
+        {
+            keyDownTime += Time.deltaTime;
+        }
+        else
+        {
+            keyDownTime = 0;
+        }
+
         keyDown = Input.anyKey;
 
         var keyUp = !keyDown && keyWasDown;
@@ -39,8 +49,8 @@ public class Atom : MonoBehaviour
     {
         if (energy > 0)
         {
-            float bonusSpeed = keyDown ? 3 : 1;
-            var radius = orbit.transform.localScale.x / 2f;
+            float bonusSpeed = keyDownTime > 0.3f ? 3 : 1;
+            var radius = orbit.transform.localScale.x * transform.localScale.x / 2f;
             emissionAngle += GameManager.INSTANCE.emissionAngleSpeed * emissionAngleSign * Time.deltaTime * bonusSpeed;
             var v = Vector2.up.Rotate(emissionAngle) * radius * 0.97f;
             charge.transform.position = transform.position + new Vector3(v.x, v.y, charge.transform.position.z);
@@ -65,6 +75,16 @@ public class Atom : MonoBehaviour
         var velocity = (transform.position - pos).normalized * GameManager.INSTANCE.emissionSpeed * 2;
         GameManager.INSTANCE.CreateNewPhoton(null, pos, velocity, energy, false);
         GameManager.INSTANCE.RegisterAtom(this);
+    }
+
+    public void GenerateBonusPhotonTowards(Atom target)
+    {
+        var dir = target.transform.position - transform.position;
+        var radius = orbit.transform.localScale.x * transform.localScale.x / 2f;
+        var pos = transform.position + (Vector3)dir.normalized * radius * 2;
+        var velocity = dir.normalized * GameManager.INSTANCE.emissionSpeed * 2;
+        GameManager.INSTANCE.CreateNewPhoton(this, pos, velocity, 1, true);
+        GameManager.INSTANCE.UnregisterAtom(this);
     }
 
     private Vector3 FindCorrectPopPosition()

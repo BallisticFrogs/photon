@@ -346,6 +346,7 @@ MonoBehaviour:
   victorySFX: {fileID: 0}
   start: {fileID: 948780388}
   end: {fileID: 475082726}
+  exit: {fileID: 0}
   checkpoints: []
 --- !u!1 &1094719392825895594
 GameObject:
@@ -359,7 +360,7 @@ GameObject:
   - component: {fileID: 1032241607971667760}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
