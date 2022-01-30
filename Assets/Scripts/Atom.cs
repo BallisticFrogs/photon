@@ -74,7 +74,8 @@ public class Atom : MonoBehaviour
             attempts++;
             var v = GenerateRandomPosition();
             var pos = sourcePos + v;
-            var hitCheck = Physics2D.CircleCast(pos, 1, -v, float.PositiveInfinity, Masks.ATOMS);
+            var hitCheck = Physics2D.CircleCast(pos, 1 + 3, -v, float.PositiveInfinity,
+                Masks.ATOMS | Masks.OBSTACLES);
             if (hitCheck.collider && hitCheck.rigidbody.gameObject == gameObject)
             {
                 return pos;
@@ -91,7 +92,7 @@ public class Atom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        var photon = col.gameObject.GetComponent<Photon>();
+        var photon = col.gameObject.GetComponentInParent<Photon>();
         if (!photon || (photon.source && photon.source.gameObject == gameObject))
         {
             return;

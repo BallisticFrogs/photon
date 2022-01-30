@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Photon : MonoBehaviour
 {
+    public GameObject particle;
+    public GameObject wave;
+
     public float energy = 1;
     public Vector2 Velocity;
     private PhotonState State = PhotonState.MOVING_PARTICULE;
@@ -15,7 +18,7 @@ public class Photon : MonoBehaviour
 
     private void Start()
     {
-        // GameManager.INSTANCE.RegisterPhoton(this);
+        SyncVisual();
     }
 
     void Update()
@@ -23,15 +26,18 @@ public class Photon : MonoBehaviour
         if (Input.anyKeyDown)
         {
             SwitchPhotonState();
+            SyncVisual();
         }
 
         transform.Translate(Velocity * Time.deltaTime);
+        float angle = Mathf.Atan2(-Velocity.y, -Velocity.x) * Mathf.Rad2Deg;
+        wave.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         timeFromSource += Time.deltaTime;
         if (!dead && timeFromSource >= GameManager.INSTANCE.missDetectionTime)
         {
-            var hit = Physics2D.CircleCast(transform.position, GetRadius(), Velocity,
-                float.PositiveInfinity, Masks.ATOMS);
+            var hit = Physics2D.CircleCast(transform.position, 1, Velocity,
+                float.PositiveInfinity, Masks.ATOMS | Masks.OBSTACLES);
             if (!hit || !hit.collider)
             {
                 dead = true;
@@ -66,6 +72,20 @@ public class Photon : MonoBehaviour
         else if (PhotonState.MOVING_WAVE == State)
         {
             State = PhotonState.MOVING_PARTICULE;
+        }
+    }
+
+    private void SyncVisual()
+    {
+        if (PhotonState.MOVING_PARTICULE == State)
+        {
+            particle.SetActive(true);
+            wave.SetActive(false);
+        }
+        else
+        {
+            particle.SetActive(false);
+            wave.SetActive(true);
         }
     }
 }

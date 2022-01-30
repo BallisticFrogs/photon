@@ -31,7 +31,7 @@ public class Hole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var photon = other.gameObject.GetComponent<Photon>();
+        var photon = other.gameObject.GetComponentInParent<Photon>();
         if (!photon) return;
 
         var photonPos = photon.transform.position;

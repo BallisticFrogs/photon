@@ -44,15 +44,15 @@
      <Compile Include="Assets\Scripts\Utils.cs" />
      <Compile Include="Assets\Scripts\Atom.cs" />
      <Compile Include="Assets\Scripts\Photon.cs" />
-     <Compile Include="Assets\Scripts\PhotonState.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Hole.cs" />
+     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Barrier.cs" />
+     <Compile Include="Assets\Scripts\PhotonState.cs" />
      <Compile Include="Assets\Scripts\Layers.cs" />
      <Compile Include="Assets\Scripts\SphereManager.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
-     <Compile Include="Assets\Scripts\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\Checkpoint.cs" />
-     <Compile Include="Assets\Scripts\Hole.cs" />
-     <Compile Include="Assets\Scripts\Barrier.cs" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>
@@ -314,11 +314,11 @@
      <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
      <HintPath>C:\dev\games\photon\Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="Newtonsoft.Json">
-     <HintPath>C:\dev\games\photon\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-     </Reference>
      <Reference Include="clipper_library">
      <HintPath>C:\dev\games\photon\Library\PackageCache\com.unity.cinemachine@2.8.4\Runtime\ThirdParty\clipper_library.dll</HintPath>
+     </Reference>
+     <Reference Include="Newtonsoft.Json">
+     <HintPath>C:\dev\games\photon\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.2.8f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -737,6 +737,12 @@
      <Reference Include="Unity.ShaderGraph.Editor">
      <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
      </Reference>
+     <Reference Include="Cinemachine">
+     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+     </Reference>
+     <Reference Include="com.unity.cinemachine.editor">
+     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
      <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
      </Reference>
@@ -842,17 +848,17 @@
      <Reference Include="Unity.VisualScripting.State">
      <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
      </Reference>
-     <Reference Include="com.unity.cinemachine.editor">
-     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+     <Reference Include="Unity.ProBuilder">
+     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
      </Reference>
-     <Reference Include="Cinemachine">
-     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+     <Reference Include="Unity.ProBuilder.AddOns.Editor">
+     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Postprocessing.Editor">
-     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+     <Reference Include="Unity.ProBuilder.Editor">
+     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Postprocessing.Runtime">
-     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+     <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+     <HintPath>C:\dev\games\photon\Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>

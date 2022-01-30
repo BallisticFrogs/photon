@@ -65,12 +65,12 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RippleDensity: 6
-    - _RippleSpeed: 1
-    - _SmoothBorderX: 0.39
+    - _RippleSpeed: 5
+    - _SmoothBorderX: 0.27
     - _SmoothBorderY: 0.43
-    - _WaveSpeed: -2.52
+    - _WaveSpeed: -6
     - _heightWaveFrequency: -0.48
-    - _opacity: 2.99
+    - _opacity: 1.68
     m_Colors:
     - _Color: {r: 0.827451, g: 0.15294118, b: 0.20392157, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
