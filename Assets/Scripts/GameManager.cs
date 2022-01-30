@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cinemachine;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,19 +20,28 @@ public class GameManager : MonoBehaviour
     public float missDetectionTime = 3f;
     public float checkpointPhotonPopDistance = 15f;
 
+    public int menuSceneIndex = 1;
+    public List<int> levelSceneIndices = new List<int>();
+
     private void Awake()
     {
         INSTANCE = this;
+    }
+
+    private void Start()
+    {
+        if (SceneManager.sceneCount == 1)
+        {
+            // load menu scene
+            SceneManager.LoadScene(menuSceneIndex);
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-#if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
+            Quit();
         }
 
         if (cinemachineTargetGroup.m_Targets.Length == 0)
@@ -43,6 +55,14 @@ public class GameManager : MonoBehaviour
             targets[0].weight = 10;
             cinemachineCam.Follow = targets[0].target;
         }
+    }
+
+    public static void Quit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
     }
 
     public async void PhotonLost(Photon photon, float delay = 0)

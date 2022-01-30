@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public Atom start;
     public Atom end;
+    public Atom exit;
 
     public List<Checkpoint> checkpoints = new List<Checkpoint>();
 
@@ -32,6 +33,11 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
+        if (exit && exit.energy > 0)
+        {
+            GameManager.Quit();
+        }
+
         RecordCheckpointProgress();
 
         if (!done && checkpoints[^1].reached)

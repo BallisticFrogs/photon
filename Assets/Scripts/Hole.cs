@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
-    private Collider2D collider;
+    private new Collider2D collider;
 
     public Transform exit1;
     public Transform exit2;
