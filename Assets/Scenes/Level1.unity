@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4008944655762072561, guid: 29fc79a3432669f45a5ea42f429dc521, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.83
+      value: 1.57
       objectReference: {fileID: 0}
     - target: {fileID: 4008944655762072561, guid: 29fc79a3432669f45a5ea42f429dc521, type: 3}
       propertyPath: m_LocalPosition.z
@@ -525,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4008944655762072561, guid: 3da34edcbd2704fe7bb61f105b550de8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.55
+      value: 14.9
       objectReference: {fileID: 0}
     - target: {fileID: 4008944655762072561, guid: 3da34edcbd2704fe7bb61f105b550de8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -578,7 +578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryVFX: {fileID: 3235186717670867809, guid: d3f9fb3e04167fd4c9b4eeb8902568c6, type: 3}
-  victorySFX: {fileID: 0}
   start: {fileID: 948780388}
   end: {fileID: 1286582012}
   exit: {fileID: 0}
