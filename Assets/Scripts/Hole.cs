@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DefaultNamespace;
-using UnityEditor;
 using UnityEngine;
 
 public class Hole : MonoBehaviour
@@ -99,7 +98,27 @@ public class Hole : MonoBehaviour
 
     private float PhotonDist(Photon photon)
     {
-        return HandleUtility.DistancePointLine(photon.transform.position, exit1.position, exit2.position);
+        return DistancePointLine(photon.transform.position, exit1.position, exit2.position);
+    }
+
+    public static float DistancePointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        return Vector3.Magnitude(ProjectPointLine(point, lineStart, lineEnd) - point);
+    }
+
+    public static Vector3 ProjectPointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        Vector3 rhs = point - lineStart;
+        Vector3 vector3 = lineEnd - lineStart;
+        float magnitude = vector3.magnitude;
+        Vector3 lhs = vector3;
+        if ((double)magnitude > 9.99999997475243E-07)
+        {
+            lhs /= magnitude;
+        }
+
+        float num = Mathf.Clamp(Vector3.Dot(lhs, rhs), 0.0f, magnitude);
+        return lineStart + lhs * num;
     }
 
     private void OnTriggerExit2D(Collider2D other)
