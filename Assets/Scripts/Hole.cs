@@ -22,6 +22,11 @@ public class Hole : MonoBehaviour
         {
             var transit = photonsInTransit[i];
 
+            if (!transit.photon)
+            {
+                ProcessPhotonExit(transit);
+            }
+
             // check for exit distance
             var d = (transit.photon.transform.position - transit.exit.position).magnitude;
 
