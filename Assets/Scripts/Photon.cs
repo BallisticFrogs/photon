@@ -30,12 +30,11 @@ public class Photon : MonoBehaviour
         }
 
         // move
-        transform.Translate(Velocity * Time.deltaTime);
-        
+        transform.position += (Vector3)Velocity * Time.deltaTime;
+
         // align to movement
         float angle = Mathf.Atan2(Velocity.y, Velocity.x) * Mathf.Rad2Deg;
-        wave.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        particle.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // check if it will never hit anything
         timeFromSource += Time.deltaTime;
