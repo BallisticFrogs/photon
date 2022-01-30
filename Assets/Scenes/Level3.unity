@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &97724621 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 833560664, guid: 29fc79a3432669f45a5ea42f429dc521, type: 3}
-  m_PrefabInstance: {fileID: 961097304}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c72496a5536b241ac0730aa606dff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &182387793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,6 +338,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3da34edcbd2704fe7bb61f105b550de8, type: 3}
+--- !u!114 &396721192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 833560664, guid: 3da34edcbd2704fe7bb61f105b550de8, type: 3}
+  m_PrefabInstance: {fileID: 396721191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c72496a5536b241ac0730aa606dff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &526020336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5901318891994761970, guid: 0e0d53de73d13404c91be1c8717be4a1, type: 3}
@@ -940,9 +940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryVFX: {fileID: 3235186717670867809, guid: d3f9fb3e04167fd4c9b4eeb8902568c6, type: 3}
-  victorySFX: {fileID: 0}
   start: {fileID: 948780388}
-  end: {fileID: 97724621}
+  end: {fileID: 396721192}
   exit: {fileID: 0}
   checkpoints: []
 --- !u!1 &1094719392825895594

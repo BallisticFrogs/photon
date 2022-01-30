@@ -21,28 +21,15 @@ public class Hole : MonoBehaviour
         for (var i = photonsInTransit.Count - 1; i >= 0; i--)
         {
             var transit = photonsInTransit[i];
-
-            if (!transit.photon)
-            {
-                ProcessPhotonExit(transit);
-                continue;
-            }
-
-            // check for exit distance
-            var d = (transit.photon.transform.position - transit.exit.position).magnitude;
-
-            // if at the exit point, let go
-            if (d < 0.01)
-            {
-                photonsInTransit.RemoveAt(i);
-                ProcessPhotonExit(transit);
-            }
+            if (!transit.photon) photonsInTransit.RemoveAt(i);
         }
     }
 
     private void ProcessPhotonExit(Transit transit)
     {
         transit.photon.SetInTransit(false);
+
+        Debug.Log("photon exiting hole: " + transit.photon.State);
 
         var speed = transit.photon.Velocity.magnitude;
         if (transit.photon.State == PhotonState.MOVING_PARTICULE)
@@ -77,6 +64,7 @@ public class Hole : MonoBehaviour
     {
         var photon = other.gameObject.GetComponentInParent<Photon>();
         if (!photon || photon.ShouldIgnoreCollision(collider)) return;
+        if (FindExistingTransit(photon) != null) return;
 
         var photonPos = photon.transform.position;
         var d1 = (photonPos - exit1.position).magnitude;
@@ -88,6 +76,37 @@ public class Hole : MonoBehaviour
         var dir = (chosenExit.transform.position - photonPos).normalized;
         photon.Velocity = dir * speed;
         photon.SetInTransit(true);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var transit = FindExistingTransit(other);
+        if (transit != null)
+        {
+            ProcessPhotonExit(transit);
+            photonsInTransit.Remove(transit);
+        }
+    }
+
+    private Transit FindExistingTransit(Collider2D other)
+    {
+        var photon = other.attachedRigidbody.gameObject.GetComponent<Photon>();
+        if (!photon) return null;
+        return FindExistingTransit(photon);
+    }
+
+    private Transit FindExistingTransit(Photon photon)
+    {
+        for (var i = photonsInTransit.Count - 1; i >= 0; i--)
+        {
+            var transit = photonsInTransit[i];
+            if (transit.photon == photon)
+            {
+                return transit;
+            }
+        }
+
+        return null;
     }
 }
 
