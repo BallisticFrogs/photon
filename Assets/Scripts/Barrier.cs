@@ -9,6 +9,8 @@ namespace DefaultNamespace
             var photon = other.gameObject.GetComponentInParent<Photon>();
             if (!photon || photon.IsInTransit()) return;
 
+            Debug.Log("killing " + photon);
+
             SoundManager.INSTANCE.sfxPhotonLost.PlaySFX();
             GameManager.INSTANCE.PhotonLost(photon);
         }

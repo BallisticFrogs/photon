@@ -12,10 +12,16 @@ public class Photon : MonoBehaviour
     [HideInInspector] public PhotonState State = PhotonState.MOVING_PARTICULE;
     [HideInInspector] public Atom source;
 
-    private readonly List<Collider2D> collidersToIgnore = new List<Collider2D>();
+    private List<Collider2D> collidersToIgnore = new List<Collider2D>();
+    private Rigidbody2D body;
     private bool inTransit;
     private float timeFromSource;
     private bool dead;
+
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
@@ -29,13 +35,7 @@ public class Photon : MonoBehaviour
             SwitchPhotonState();
         }
 
-        // move
-        transform.position += (Vector3)Velocity * Time.deltaTime;
         GameManager.INSTANCE.emitParticles(this.transform.position);
-
-        // align to movement
-        float angle = Mathf.Atan2(Velocity.y, Velocity.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // check if it will never hit anything
         timeFromSource += Time.deltaTime;
@@ -50,6 +50,17 @@ public class Photon : MonoBehaviour
                 GameManager.INSTANCE.PhotonLost(this, 5000);
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        // move
+        body.MovePosition(transform.position + (Vector3)Velocity * Time.deltaTime);
+
+        // align to movement
+        float angle = Mathf.Atan2(Velocity.y, Velocity.x) * Mathf.Rad2Deg;
+        // body.MoveRotation(Quaternion.AngleAxis(angle, Vector3.forward));
+        body.MoveRotation(angle);
     }
 
     public void SetInTransit(bool transit)
@@ -105,7 +116,10 @@ public class Photon : MonoBehaviour
     {
         foreach (var other in collidersToIgnore)
         {
-            if (other == col) return true;
+            if (other == col && col.attachedRigidbody.gameObject == other.attachedRigidbody.gameObject)
+            {
+                return true;
+            }
         }
 
         return false;
