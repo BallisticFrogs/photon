@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public CinemachineVirtualCamera cinemachineCam;
     public CinemachineTargetGroup cinemachineTargetGroup;
-    
+
     public ParticleSystem photonParticleVFX;
 
     public float levelSpacing = 50f;
@@ -127,7 +126,7 @@ public class GameManager : MonoBehaviour
 #endif
         Application.Quit();
     }
-    
+
     public void emitParticles(Vector3 position)
     {
         photonParticleVFX.transform.position = position;
