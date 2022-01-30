@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public Atom start;
     public Atom end;
     public Atom exit;
+    public UnityEvent onVictory;
 
     public List<Checkpoint> checkpoints = new List<Checkpoint>();
 
@@ -43,6 +45,7 @@ public class LevelManager : MonoBehaviour
             GameManager.INSTANCE.CleanupForVictory(end);
             Instantiate(victoryVFX, end.transform.position, Quaternion.identity);
             SoundManager.INSTANCE.sfxVictory.PlaySFX();
+            onVictory?.Invoke();
 
             await Task.Delay(2000);
             GameManager.INSTANCE.NextLevel(end);
