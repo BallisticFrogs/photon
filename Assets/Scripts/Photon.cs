@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -8,10 +9,10 @@ public class Photon : MonoBehaviour
 
     public float energy = 1;
     public Vector2 Velocity;
-    private PhotonState State = PhotonState.MOVING_PARTICULE;
-
+    [HideInInspector] public PhotonState State = PhotonState.MOVING_PARTICULE;
     [HideInInspector] public Atom source;
 
+    private readonly List<Collider2D> collidersToIgnore = new List<Collider2D>();
     private bool inTransit;
     private float timeFromSource;
     private bool dead;
@@ -26,7 +27,6 @@ public class Photon : MonoBehaviour
         if (Input.anyKeyDown)
         {
             SwitchPhotonState();
-            SyncVisual();
         }
 
         transform.Translate(Velocity * Time.deltaTime);
@@ -63,7 +63,7 @@ public class Photon : MonoBehaviour
         return transform.localScale.x * 0.5f;
     }
 
-    void SwitchPhotonState()
+    public void SwitchPhotonState()
     {
         if (PhotonState.MOVING_PARTICULE == State)
         {
@@ -73,6 +73,8 @@ public class Photon : MonoBehaviour
         {
             State = PhotonState.MOVING_PARTICULE;
         }
+
+        SyncVisual();
     }
 
     private void SyncVisual()
@@ -87,5 +89,20 @@ public class Photon : MonoBehaviour
             particle.SetActive(false);
             wave.SetActive(true);
         }
+    }
+
+    public void AddColliderToIgnore(Collider2D col)
+    {
+        collidersToIgnore.Add(col);
+    }
+
+    public bool ShouldIgnoreCollision(Collider2D col)
+    {
+        foreach (var other in collidersToIgnore)
+        {
+            if (other == col) return true;
+        }
+
+        return false;
     }
 }

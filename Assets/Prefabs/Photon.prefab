@@ -473,6 +473,7 @@ MonoBehaviour:
   wave: {fileID: 7128244169246573795}
   energy: 1
   Velocity: {x: 4, y: 0}
+  State: 0
   source: {fileID: 0}
 --- !u!50 &128761050
 Rigidbody2D:

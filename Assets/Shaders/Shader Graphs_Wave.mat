@@ -59,7 +59,7 @@ Material:
     - _BorderOpacityX: 0.54
     - _BorderOpacityY: 0.48
     - _EnableExternalAlpha: 0
-    - _HeightWaveFrequency: 0.24
+    - _HeightWaveFrequency: 0.3
     - _MaxMask: -0.3
     - _MinMask: -0.75
     - _QueueControl: 0
@@ -68,7 +68,7 @@ Material:
     - _RippleSpeed: 5
     - _SmoothBorderX: 0.27
     - _SmoothBorderY: 0.43
-    - _WaveSpeed: -6
+    - _WaveSpeed: -8
     - _heightWaveFrequency: -0.48
     - _opacity: 1.68
     m_Colors:

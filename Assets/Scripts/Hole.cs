@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
+    private Collider2D collider2D;
+
     public Transform exit1;
     public Transform exit2;
 
     private readonly List<Transit> photonsInTransit = new List<Transit>();
+
+    private void Awake()
+    {
+        collider2D = GetComponent<Collider2D>();
+    }
 
     void Update()
     {
@@ -22,17 +29,48 @@ public class Hole : MonoBehaviour
             if (d < 0.01)
             {
                 photonsInTransit.RemoveAt(i);
-                transit.photon.SetInTransit(false);
-                transit.photon.Velocity = transit.photon.Velocity.Rotate(Random.Range(-60, 60));
-                // TODO redirect or split
+                ProcessPhotonExit(transit);
             }
         }
+    }
+
+    private void ProcessPhotonExit(Transit transit)
+    {
+        transit.photon.SetInTransit(false);
+
+        var speed = transit.photon.Velocity.magnitude;
+        if (transit.photon.State == PhotonState.MOVING_PARTICULE)
+        {
+            var outCount = transit.exit.childCount;
+            var index = Random.Range(0, outCount);
+            transit.photon.Velocity = ComputeOutVelocity(transit, index, speed);
+        }
+        else
+        {
+            // incoming photon takes first out target
+            transit.photon.Velocity = ComputeOutVelocity(transit, 0, speed);
+
+            // clone photon for each out target
+            for (int i = 1; i < transit.exit.childCount; i++)
+            {
+                var newPhoton = GameManager.INSTANCE.CreateNewPhoton(transit.photon);
+                newPhoton.SwitchPhotonState();
+                newPhoton.AddColliderToIgnore(collider2D);
+                newPhoton.Velocity = ComputeOutVelocity(transit, i, speed);
+            }
+        }
+    }
+
+    private static Vector3 ComputeOutVelocity(Transit transit, int index, float speed)
+    {
+        var outTarget = transit.exit.transform.GetChild(index).transform.position;
+        return (outTarget - transit.exit.position).normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         var photon = other.gameObject.GetComponentInParent<Photon>();
-        if (!photon) return;
+        if (!photon || photon.ShouldIgnoreCollision(collider2D)) return;
 
         var photonPos = photon.transform.position;
         var d1 = (photonPos - exit1.position).magnitude;

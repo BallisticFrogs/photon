@@ -72,6 +72,11 @@ public class GameManager : MonoBehaviour
         return CreateNewPhoton(atom, pos, velocity, atom.energy);
     }
 
+    public Photon CreateNewPhoton(Photon photon)
+    {
+        return CreateNewPhoton(photon.source, photon.transform.position, photon.Velocity, photon.energy);
+    }
+
     public Photon CreateNewPhoton(Atom source, Vector3 pos, Vector3 velocity, float energy,
         bool register = true)
     {
