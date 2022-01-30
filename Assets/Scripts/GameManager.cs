@@ -115,7 +115,6 @@ public class GameManager : MonoBehaviour
         var targets = cinemachineTargetGroup.m_Targets;
         if (targets.Length > 0)
         {
-            targets[0].weight = 10;
             cinemachineCam.Follow = targets[0].target;
         }
     }
@@ -170,6 +169,7 @@ public class GameManager : MonoBehaviour
         bool register = true)
     {
         var photonObj = Instantiate(INSTANCE.photonPrefab, pos, Quaternion.identity);
+        photonObj.name = "photon_" + Random.Range(1, 1000);
         var photon = photonObj.GetComponent<Photon>();
         photon.Velocity = velocity;
         photon.source = source;
@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
             var i = cinemachineTargetGroup.FindMember(photon.gameObject.transform);
             if (i < 0)
             {
-                cinemachineTargetGroup.AddMember(photon.gameObject.transform, 1, 0.5f);
+                cinemachineTargetGroup.AddMember(photon.gameObject.transform, 1, 3f);
             }
         }
     }
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
         var i = cinemachineTargetGroup.FindMember(atom.transform);
         if (i < 0)
         {
-            cinemachineTargetGroup.AddMember(atom.transform, 1, 0.5f);
+            cinemachineTargetGroup.AddMember(atom.transform, 1, 5f);
         }
     }
 
