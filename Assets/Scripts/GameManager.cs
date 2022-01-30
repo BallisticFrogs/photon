@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public CinemachineVirtualCamera cinemachineCam;
     public CinemachineTargetGroup cinemachineTargetGroup;
+    
+    public ParticleSystem photonParticleVFX;
 
     public float emissionAngleSpeed = -1f;
     public float emissionSpeed = 2f;
@@ -63,6 +65,12 @@ public class GameManager : MonoBehaviour
         EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+    
+    public void emitParticles(Vector3 position)
+    {
+        photonParticleVFX.transform.position = position;
+        photonParticleVFX.Emit(1);
     }
 
     public async void PhotonLost(Photon photon, float delay = 0)

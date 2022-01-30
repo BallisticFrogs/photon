@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 5934526288393725229}
   - component: {fileID: 5934526288393725218}
   m_Layer: 7
-  m_Name: BlueSphere
+  m_Name: RedSphere2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 5934526288468385409}
   - component: {fileID: 5934526288468385414}
   m_Layer: 7
-  m_Name: GreenSphere
+  m_Name: RedSphere3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 5934526289796279805}
   - component: {fileID: 5934526289796279806}
   m_Layer: 7
-  m_Name: RedSphere
+  m_Name: RedSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7128244169246573804
 Transform:
   m_ObjectHideFlags: 0

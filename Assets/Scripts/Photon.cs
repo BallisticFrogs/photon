@@ -31,7 +31,8 @@ public class Photon : MonoBehaviour
 
         // move
         transform.position += (Vector3)Velocity * Time.deltaTime;
-
+        GameManager.INSTANCE.emitParticles(this.transform.position);
+        
         // align to movement
         float angle = Mathf.Atan2(Velocity.y, Velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
