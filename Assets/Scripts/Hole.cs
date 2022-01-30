@@ -25,6 +25,7 @@ public class Hole : MonoBehaviour
             if (!transit.photon)
             {
                 ProcessPhotonExit(transit);
+                continue;
             }
 
             // check for exit distance
