@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
-    private Collider2D collider2D;
+    private Collider2D collider;
 
     public Transform exit1;
     public Transform exit2;
@@ -13,7 +13,7 @@ public class Hole : MonoBehaviour
 
     private void Awake()
     {
-        collider2D = GetComponent<Collider2D>();
+        collider = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -55,7 +55,7 @@ public class Hole : MonoBehaviour
             {
                 var newPhoton = GameManager.INSTANCE.CreateNewPhoton(transit.photon);
                 newPhoton.SwitchPhotonState();
-                newPhoton.AddColliderToIgnore(collider2D);
+                newPhoton.AddColliderToIgnore(collider);
                 newPhoton.Velocity = ComputeOutVelocity(transit, i, speed);
             }
         }
@@ -70,7 +70,7 @@ public class Hole : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var photon = other.gameObject.GetComponentInParent<Photon>();
-        if (!photon || photon.ShouldIgnoreCollision(collider2D)) return;
+        if (!photon || photon.ShouldIgnoreCollision(collider)) return;
 
         var photonPos = photon.transform.position;
         var d1 = (photonPos - exit1.position).magnitude;

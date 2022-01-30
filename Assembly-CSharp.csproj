@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\Layers.cs" />
      <Compile Include="Assets\Scripts\SphereManager.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
+     <Compile Include="Assets\Scripts\NucleusManager.cs" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>

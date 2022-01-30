@@ -44,6 +44,9 @@ public class Atom : MonoBehaviour
             emissionAngle += GameManager.INSTANCE.emissionAngleSpeed * emissionAngleSign * Time.deltaTime * bonusSpeed;
             var v = Vector2.up.Rotate(emissionAngle) * radius * 0.97f;
             charge.transform.position = transform.position + new Vector3(v.x, v.y, charge.transform.position.z);
+
+            float angle = Mathf.Atan2(-v.y, -v.x) * Mathf.Rad2Deg;
+            charge.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         if (energy <= 0 && charge.activeSelf)
