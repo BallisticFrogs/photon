@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AtomFinal
       objectReference: {fileID: 0}
+    - target: {fileID: 4008944655762072560, guid: 3da34edcbd2704fe7bb61f105b550de8, type: 3}
+      propertyPath: m_TagString
+      value: Atom
+      objectReference: {fileID: 0}
     - target: {fileID: 4008944655762072561, guid: 3da34edcbd2704fe7bb61f105b550de8, type: 3}
       propertyPath: m_RootOrder
       value: 12

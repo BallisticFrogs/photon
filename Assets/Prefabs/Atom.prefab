@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 7953030890626446345}
   m_Layer: 6
   m_Name: Atom
-  m_TagString: Untagged
+  m_TagString: Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NucleusSphere: {fileID: 9155927245274388366, guid: eee2dc7481ce34c6fa0f062c860062e9, type: 3}
+  background: 0
 --- !u!1 &4008944656574937581
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ public class Atom : MonoBehaviour
         GameManager.INSTANCE.CreateNewPhoton(this);
         GameManager.INSTANCE.UnregisterAtom(this);
         energy = 0;
+        SoundManager.INSTANCE.sfxEmitted.PlaySFX();
     }
 
     private void UpdateEmissionAngle()
@@ -127,6 +128,7 @@ public class Atom : MonoBehaviour
         emissionAngle = Vector2.SignedAngle(Vector2.up, nucleusToCollision);
         GameManager.INSTANCE.PhotonLost(photon);
         GameManager.INSTANCE.RegisterAtom(this);
+        SoundManager.INSTANCE.sfxCaptured.PlaySFX();
 
         // compute rotation direction from angle and position of the incoming photon relative to the nucleus
         float a = Vector2.SignedAngle(photon.Velocity, -nucleusToCollision);

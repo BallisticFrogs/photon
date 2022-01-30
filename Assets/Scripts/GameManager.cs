@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cinemachine;
+using DefaultNamespace;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,17 +33,13 @@ public class GameManager : MonoBehaviour
         INSTANCE = this;
     }
 
-    private void Start()
+    private async void Start()
     {
         if (SceneManager.sceneCount == 1)
         {
             // load menu scene
             SceneManager.LoadScene(menuSceneIndex, LoadSceneMode.Additive);
         }
-
-        var levelManagerObj = GameObject.FindGameObjectWithTag(TAG_LEVEL_MANAGER);
-        var levelManager = levelManagerObj.GetComponent<LevelManager>();
-        levelManager.RestartAtLastCheckpoint();
     }
 
     public async void NextLevel(Atom currentPosition)
@@ -54,7 +51,7 @@ public class GameManager : MonoBehaviour
         var sceneIndex = currentScene.buildIndex;
         var levelIndex = levelSceneIndices.IndexOf(sceneIndex);
         var nextLevel = levelIndex < 0 ? 0 : levelIndex + 1;
-        if (levelIndex >= levelSceneIndices.Count)
+        if (nextLevel >= levelSceneIndices.Count)
         {
             Debug.Log("no next level found");
             return;
@@ -63,15 +60,9 @@ public class GameManager : MonoBehaviour
         var nextSceneIndex = levelSceneIndices[nextLevel];
 
         // make sure the old level manager is not active
-        var levelManagers = GameObject.FindGameObjectsWithTag(TAG_LEVEL_MANAGER);
-        foreach (var currManager in levelManagers)
-        {
-            currManager.SetActive(false);
-        }
+        LevelManager.INSTANCE.enabled = false;
 
         // load scene
-        var nextScene = SceneManager.GetSceneByBuildIndex(nextSceneIndex);
-        // SceneManager.LoadScene(nextSceneIndex, LoadSceneMode.Additive);
         await SceneManager.LoadSceneAsync(nextSceneIndex, LoadSceneMode.Additive);
 
         Debug.Log("next level loaded, preparing it");
@@ -89,9 +80,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("sending player to next level start atom");
 
         // send player to the new level
-        var levelManagerObj = GameObject.FindGameObjectWithTag(TAG_LEVEL_MANAGER);
-        var levelManager = levelManagerObj.GetComponent<LevelManager>();
-        currentPosition.GenerateBonusPhotonTowards(levelManager.start);
+        currentPosition.GenerateBonusPhotonTowards(LevelManager.INSTANCE.start);
 
         // unload previous scene
         await Task.Delay(3000);
@@ -106,8 +95,20 @@ public class GameManager : MonoBehaviour
             Quit();
         }
 
+        if (LevelManager.INSTANCE == null) return;
+
+        for (var i = 0; i < cinemachineTargetGroup.m_Targets.Length; i++)
+        {
+            var t = cinemachineTargetGroup.m_Targets[i];
+            if (!t.target)
+            {
+                cinemachineTargetGroup.RemoveMember(t.target);
+            }
+        }
+
         if (cinemachineTargetGroup.m_Targets.Length == 0)
         {
+            SoundManager.INSTANCE.sfxDeath.PlaySFX();
             LevelManager.INSTANCE.RestartAtLastCheckpoint();
         }
 
@@ -144,6 +145,10 @@ public class GameManager : MonoBehaviour
         if (delay > 0)
         {
             await Task.Delay(5000);
+        }
+        else
+        {
+            SoundManager.INSTANCE.sfxPhotonLost.PlaySFX();
         }
 
         if (photon && photon.gameObject)
@@ -213,5 +218,29 @@ public class GameManager : MonoBehaviour
     public void UnregisterAtom(Atom atom)
     {
         cinemachineTargetGroup.RemoveMember(atom.transform);
+    }
+
+    public void CleanupForVictory(Atom end)
+    {
+        var atoms = GameObject.FindGameObjectsWithTag("Atom");
+        foreach (var atom in atoms)
+        {
+            var a = atom.GetComponent<Atom>();
+            a.energy = 0;
+        }
+
+        var photons = GameObject.FindGameObjectsWithTag("Photon");
+        foreach (var photon in photons)
+        {
+            var p = photon.GetComponent<Photon>();
+            if (p)
+            {
+                p.energy = 0;
+            }
+
+            Destroy(photon);
+        }
+
+        RegisterAtom(end);
     }
 }

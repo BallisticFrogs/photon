@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour
     public static LevelManager INSTANCE;
 
     public GameObject victoryVFX;
-    public AudioClip victorySFX;
 
     public Atom start;
     public Atom end;
@@ -39,13 +38,11 @@ public class LevelManager : MonoBehaviour
         if (!done && checkpoints[^1].reached)
         {
             done = true;
-            enabled = false;
-            INSTANCE = null;
 
             // victory
-            end.energy = 0;
+            GameManager.INSTANCE.CleanupForVictory(end);
             Instantiate(victoryVFX, end.transform.position, Quaternion.identity);
-            // TODO play SFX
+            SoundManager.INSTANCE.sfxVictory.PlaySFX();
 
             await Task.Delay(2000);
             GameManager.INSTANCE.NextLevel(end);
