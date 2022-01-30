@@ -9,8 +9,9 @@ public class NucleusManager : MonoBehaviour
     public GameObject NucleusSphere;
     private Vector3 randomAxis1;
     private Vector3 randomAxis2;
-    private float speed1;
-    private float speed2;
+    public bool background;
+    private float rotationSpeed1;
+    private float rotationSpeed2;
 
     // Start is called before the first frame update
     void Start()
@@ -35,14 +36,18 @@ public class NucleusManager : MonoBehaviour
         
         randomAxis1 = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(-5, 5));
         randomAxis2 = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(-5, 5));
-        speed1 = Random.Range(10, 200);
-        speed2 = Random.Range(10, 200);
+        var maxSpeed = 200;
+        if (background)
+            maxSpeed = 30;
+
+        rotationSpeed1 = Random.Range(10, maxSpeed);
+        rotationSpeed2 = Random.Range(10, maxSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(randomAxis1, speed1*Time.deltaTime );
-        this.transform.Rotate(randomAxis2, speed2*Time.deltaTime );
+        this.transform.Rotate(randomAxis1, rotationSpeed1*Time.deltaTime );
+        this.transform.Rotate(randomAxis2, rotationSpeed2*Time.deltaTime );
     }
 }
