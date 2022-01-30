@@ -366,7 +366,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7387133, y: 1}
+    m_SensorSize: {x: 1.5191424, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   missDetectionTime: 1
   checkpointPhotonPopDistance: 7
   menuSceneIndex: 1
-  levelSceneIndices: 020000000300000004000000
+  levelSceneIndices: 02000000030000000400000005000000
 --- !u!4 &909398718
 Transform:
   m_ObjectHideFlags: 0
