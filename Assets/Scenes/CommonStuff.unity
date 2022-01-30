@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEmitted: {fileID: 8300000, guid: 34524e698c857724a9ef4f00f1c8a3d0, type: 3}
-  sfxCaptured: {fileID: 8300000, guid: ead034cfcae3fdd4a9ea03f29903a7b9, type: 3}
+  sfxCaptured: {fileID: 8300000, guid: 4cc1eb0d395ace94bb724f7804402c35, type: 3}
   sfxVictory: {fileID: 8300000, guid: 12a82144d63be9d4c9061315830b43e6, type: 3}
-  sfxDeath: {fileID: 8300000, guid: 6de5925957f51f64fb92943e32185585, type: 3}
+  sfxDeath: {fileID: 8300000, guid: 69e07d09a670a1a4eaa4d5188874b7ab, type: 3}
   sfxSwitch: {fileID: 8300000, guid: 6de5925957f51f64fb92943e32185585, type: 3}
   sfxPhotonLost: {fileID: 8300000, guid: 69e07d09a670a1a4eaa4d5188874b7ab, type: 3}
 --- !u!82 &124491263

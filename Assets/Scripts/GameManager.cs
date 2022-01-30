@@ -146,10 +146,6 @@ public class GameManager : MonoBehaviour
         {
             await Task.Delay(5000);
         }
-        else
-        {
-            SoundManager.INSTANCE.sfxPhotonLost.PlaySFX();
-        }
 
         if (photon && photon.gameObject)
         {

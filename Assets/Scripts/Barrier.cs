@@ -8,7 +8,8 @@ namespace DefaultNamespace
         {
             var photon = other.gameObject.GetComponentInParent<Photon>();
             if (!photon || photon.IsInTransit()) return;
-            
+
+            SoundManager.INSTANCE.sfxPhotonLost.PlaySFX();
             GameManager.INSTANCE.PhotonLost(photon);
         }
     }
